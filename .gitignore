@@ -1,0 +1,9 @@
+# Ignore the files that are created after compilation of main.tex
+
+**/*.aux
+**/*.bbl
+**/*.blg
+**/*.log
+**/*.log
+**/*.out
+**/*.gz
