@@ -1,0 +1,201 @@
+\documentclass[10pt]{article}
+
+\usepackage[a4paper,total={17cm,25cm}]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage[mathcal]{euscript}
+\usepackage[colorlinks=true,citecolor=blue]{hyperref}
+\usepackage{cleveref}
+\usepackage{graphicx}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{conj}{Conjecture}
+\newtheorem{exmp}{Example}
+
+\crefname{lem}{Lemma}{Lemmas}
+\crefname{thm}{Theorem}{Theorems}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+
+\newenvironment{prf}{\noindent\textbf{Proof.}}{\hfill$\blacksquare$}
+
+\DeclareMathOperator{\clr}{\text{clr}}
+
+\begin{document}
+
+\begin{center}
+{\Large \scshape Completion of a Metric Space} \\
+Written by Hosein Rahnama
+\end{center}
+
+\begin{defn}
+A mapping $i:M\to N$ is said to be an isometry iff it is surjective and for every $x,\,y\in M$ we have $d_M(x,y)=d_N(i(x),i(y))$.
+\end{defn}
+
+\begin{defn}
+A mapping $h:M\to N$ is said to be a homeomorphism iff it is a continuous bijection which also has a continuous inverse. Homeomorphisms are also called topological mappings.
+\end{defn}
+
+\begin{thm}
+If $i:M\to N$ is an isometry then it is injective and uniformly continuous. Furthermore, it has an inverse which is also an isometry. This implies that an isometry is a homeomorphism.
+\label{thm:iso}
+\end{thm}
+
+\begin{defn}
+Two metric spaces $(M,d_M)$ and $(N,d_N)$ are said to be isometric, if there exists an isometry $i:M\to N$ between them.
+\end{defn}
+
+\begin{thm} 
+An isometry preserves all topological and metric related properties. More specifically, if $i:M\to N$ is an isometry and $A\subset M$ then openness, closedness, compactness, connetedness or path-connectedness of $A$ implies that its image $i(A)$ has the same topological property. In addition, for metric related properties of $A$, we have that if $A$ is bounded or complete then its image $i(A)$ is also bounded or complete. Furthermore, if $a:\mathbb{N}\to M$ is a convergent or Cauchy sequence then its image sequence $i\circ a:\mathbb{N}\to N$ is also convergent or Cauchy.
+\label{thm:iso:equi}
+\end{thm}
+
+\begin{defn}
+A completion of a metric space $(M,d_M)$ is a complete metric space $(C,d_C)$ which has a metric subspace $(N,d_N)$ which is dense in $C$ and is isometric with $M$. It is in this sense that we say $C$ is the smallest complete metric space containing $M$.
+\end{defn}
+
+The following two lemmas are frequently used in the proof of the completion theorem.
+
+\begin{lem}
+Let $K\in\mathbb{N}$, $a:\mathbb{N}\to \mathbb{R}$ and $b:\mathbb{N}\to \mathbb{R}$ be convergent sequences. If for all $n \ge K$ we have $a_n > b_n$ then $\lim_{n\to\infty}a_n \ge \lim_{n\to\infty}b_n$. That is we can take limit from both sides of an strict inequality and replace it with a non-strict one.
+\label{ineq:lim}
+\end{lem}
+
+\begin{lem}
+Let $w, x, y, z\in M$. Then we have the inequality $\left|d(w,x)-d(y,z)\right|\leq d(w,y)+d(x,z)$.
+\label{inv:tri}
+\end{lem}
+
+\begin{thm}
+\textbf{Completion of a metric space}. Every metric space has a completion. Furthermore, this completion is unique up to an isometry. This means that any two completions are isometric. This is called the universal property of a completion.
+\end{thm}
+
+\begin{prf}
+The proof is a little bit lengthy so let us first sketch different steps of the proof as follows.
+\begin{enumerate}
+\item 
+Let $\mathscr{C}$ to be the set of all Cauchy sequences in $M$. Define the relation of being co-Cauchy on $\mathscr{C}$. Show that this relation is an equivalence relation on $\mathscr{C}$. Define $C$ as the set of all resulting equivalence classes. Show that the mapping $d_C:C\times C \to \mathbb{R}$ defined by $d_C([a],[b]):=\lim_{n\to\infty}d_M(a_n,b_n)$ is well-defined and a metric on $C$.
+\item
+Consider the mapping $i:M\to i(M)\subset C$ which takes every point $x\in M$ to the equivalence class $[a]$ corresponding to the constant sequence $a:\mathbb{N}\to M$ defined as $a_n=x$. This makes sense since every constant sequence is Cauchy. Verify that $M$ and $i(M)$ are isometric and $i(M)$ is dense in $C$ that is $\clr\,i(M) = C$. Show that $C$ is complete. Verify that $i(M)=C$ if and only if $M$ is complete, meaning that this procedure is trivial when our original space is complete.
+\item
+The last step is to show that every two completions are isometric. Let $(C,d_C)$ and $(E,d_E)$ be any two completions. Then, there are isometries $i:M\to i(M)\subset C$ and $j:M\to j(M)\subset E$ such that $\clr i(M)=C$ and $\clr j(M)=E$. Verify that $i(M)$ and $j(M)$ are isometric by the map $\mathfrak{i}:=j\circ i^{-1}:i(M)\to j(M)$. Take any equivalence class $[a]\in C$ and let $\mathcal{A}:\mathbb{N}\to i(M)$ be a sequence of equivalence classes converging to $[a]$. Define $f([a]):=\lim_{n\to\infty}(\mathfrak{i}\circ\mathcal{A})_n$. Show that $f:C\to E$ is well-defined and is an isometry. Verify that $f|_{i(M)}=\mathfrak{i}$. Furthermore, for every other isometry $g:C\to E$ having the property $g|_{i(M)}=\mathfrak{i}$ we have $f=g$, meaning that $f:C\to E$ is unique in this sense.
+\end{enumerate}
+
+Let us carry out the steps in more detail. We say that two Cauchy sequences $a:\mathbb{N}\to M$ and $b:\mathbb{N}\to M$ are co-Cauchy iff $\lim_{n\to\infty}d_M(a_n,b_n)=0$ and write $a\sim b$. This is an equivalence relation. It is reflexive since $\lim_{n\to\infty}d_M(a_n,a_n)=\lim_{n\to\infty}0=0$. It is symmetric because symmetry of $d_M$ implies $\lim_{n\to\infty}d_M(b_n,a_n)=\lim_{n\to\infty}d_M(a_n,b_n)=0$. Furthermore, suppose that $\lim_{n\to\infty}d_M(a_n,b_n)=0$ and $\lim_{n\to\infty}d_M(b_n,c_n)=0$. By the positive-definitness and triangle inequality we have that $0\leq d_M(a_n,c_n)\leq d_M(a_n,b_n)+d_M(b_n,c_n)$ and by \cref{ineq:lim} we are allowed to take limits that gives us $\lim_{n\to\infty}d_M(a_n,c_n)=0$ which means the co-Cauchy relation is transitive. Equivalence relations are just a mathematical way to consider a group of elements of a set as identical. Define $\mathscr{C}$ to be the set of all Cauchy sequences in $M$, that is
+\begin{equation}
+\mathscr{C}=\left\{a:\mathbb{N}\to M\,|\,\forall\epsilon>0,\,\,\exists K\in\mathbb{N},\,\,\forall m,n\ge K \implies d_M(a_n,a_m)<\epsilon\right\}
+\end{equation}
+and let $\sim$ be the equivalence relation of being co-Cauchy on $\mathscr{C}$. An equivalence class is given by $[a]=\{b\in\mathscr{C}\,|\,b\sim a\}$. Let our candidate for a completion to be the set of all these equivalence classes
+\begin{equation}
+C:=\frac{\mathscr{C}}{\sim}=\{[a]\,|\,a\in\mathscr{C}\}.
+\end{equation}
+This equivalence relation breaks $\mathscr{C}$ into disjoint equivalence classes, which literally means that
+\begin{equation}
+\mathscr{C}=\bigsqcup_{[a]\in C}[a].
+\end{equation}
+This whole procedure means that we are inclined to see all co-Cauchy sequences as identical in our candidate space $C$. The metric $d_C$ we introduced above is natural in the sense that we are just measuring the distance of the tails of Cauchy sequences. First let us verify the well-definedness of $d_C$. We must show that the limit introduced in its definition exists and it does not depend on the choice of a representative of the equivalence classes. The sequence $d_M\circ(a\times b):\mathbb{N}\to \mathbb{R}$ is Cauchy since by \cref{inv:tri} we have
+\begin{equation}
+|d_M(a_m,b_m)-d_M(a_n,b_n)|\leq d_M(a_m,a_n)+d_M(b_m,b_n)
+\end{equation}
+and $a:\mathbb{N}\to\mathbb{R}$, $b:\mathbb{N}\to\mathbb{R}$ are Cauchy. Completeness of $\mathbb{R}$ implies that $d_M\circ(a\times b):\mathbb{N}\to \mathbb{R}$ converges so the limit $\lim_{n\to\infty}d_M(a_n,b_n)$ exists. Let $c:\mathbb{N}\to\mathbb{R}$ and $d:\mathbb{N}\to\mathbb{R}$ be two sequences such that $c\in [a]$ and $d\in [b]$ then $L_1:=\lim_{n\to\infty}d_M(a_n,b_n)=\lim_{n\to\infty}d_M(c_n,d_n)=:L_2$. This means that if you want to measure the distance between the tails of two Cauchy sequences you can replace them with their co-Cauchy counterparts. This is intuitively obvious! To make this precise, note that
+\begin{equation}
+\begin{aligned}[b]
+\left|L_1-L_2\right|&\leq\left|L_1-d_M(a_n,b_n)\right|+\left|d_M(a_n,b_n)-d_M(c_n,d_n)\right|+\left|d_M(c_n,d_n)-L_2\right| \\
+&\leq \left|d_M(a_n,b_n)-L_1\right|+\big(d_M(a_n,c_n)+d_M(b_n,d_n)\big)+\left|d_M(c_n,d_n)-L_2\right|,
+\end{aligned}
+\end{equation}
+where we used the triangle inequality and \cref{inv:tri}. Using \cref{ineq:lim}, taking limits from both sides and using the continuity of absolute value $|\cdot|$ leads us to $L_1=L_2$, as desired. The next step is to justify that $d_C$ is a metric. Let $a:\mathbb{N}\to M$, $b:\mathbb{N}\to M$, $c:\mathbb{N}\to M$ be Cauchy sequences. It is clear that $d_M(a_n,b_n)\ge 0$ and using \cref{ineq:lim} gives us $d_C([a],[b])\ge 0$ so $d_C$ is positive. It is also definite since we have
+\begin{equation}
+[a]=[b] \iff a\sim b \iff \lim_{n\to\infty}d_M(a_n,b_n)=0 \iff d_C([a],[b])=0.
+\end{equation}
+It is symmetric since $d_M$ is symmetric 
+\begin{equation}
+d_C([a],[b])=\lim_{n\to\infty}d_M(a_n,b_n)=\lim_{n\to\infty}d_M(b_n,a_n)=d_C([b],[a]).
+\end{equation}
+It also obeys the triangle inequality since $d_M$ obeys this inequality and by \cref{ineq:lim} we can take limits from both side of an inequality to obtain
+\begin{equation}
+d_M(a_n,c_n)\leq d_M(a_n,b_n)+d_M(b_n,c_n) \implies
+d_C([a],[c])\leq d_C([a],[b])+d_C([b],[c]).
+\end{equation}
+
+Now, consider the mapping introduced in step 2. Choose any two elements of $M$, say $x$ and $y$. Let $a:\mathbb{N}\to M$ and $b:\mathbb{N}\to M$ be two constant sequences such that $a_n=x$ and $b_n=y$. By construction of $i$, we have $i(x)=[a]$ and $i(y)=[b]$. Then, it is easily verified that $i$ is an isometry
+\begin{equation}
+d_C(i(x),i(y))=d_C([a],[b])=\lim_{n\to\infty}d_M(a_n,b_n)=\lim_{n\to\infty}d_M(x,y)=d_M(x,y).
+\end{equation}
+Furthermore, it is trivial that $i:M\to i(M)$ is surjective. Thus $M$ and $i(M)$ are isometric. By \cref{thm:iso:equi}, this means that these two metric space are indistinguishable and $i(M)$ is a copy of $M$, having all original information about $M$, living inside $C$. Next, we show that $i(M)$ is dense in $C$. Let us see what does it really mean. We should have the set equality $\clr i(M)= C$. This is equivalent to $\clr i(M) \subset C$ and $C \subset \clr i(M)$. The former follows immediately from $i(M)\subset C$ and the latter is equivalent to that every equivalence class $[a]\in C$ is a limit point of $i(M)$. This means that every open ball $B_C([a],r)$ contains an element of $i(M)$. More precisely, we want to prove that
+\begin{equation}
+\forall [a]\in C,\,\,\forall r>0,\,\,\exists [b]\in i(M),\,\,d_C([b],[a])<r.
+\end{equation}
+This is equivalent to
+\begin{equation}
+\forall [a]\in C,\,\,\forall r>0,\,\,\exists y\in M,\,\,\lim_{n\to\infty}d_M(y,a_n)<r.
+\end{equation}
+Since $a:\mathbb{N}\to M$ is a Cauchy sequence then there is a $K$ such that for all $n,m\ge K$ we have $d_M(a_m,a_n)<\frac{r}{2}$. Take $y=a_K$ so that for $n\ge K$ we have $d_M(y,a_n)<\frac{r}{2}$. Using \cref{ineq:lim}, we can pass to limits $\lim_{n\to\infty}d_M(y,a_n)\leq \frac{r}{2} <r$.
+
+We are ready to show that $C$ is complete. For this purpose, we should consider an arbitrary Cauchy sequence of equivalence classes. To adopt a notation consistent with our previous development, let $\mathsf{a}:\mathbb{N}\times\mathbb{N}\to M$ be a sequence of sequences or a double sequence. Clearly, $\mathsf{a}_{m,n}$ is in $M$ and by $\mathsf{a}_{m,\cdot}$ we mean the sequence obtained by puting $m$ in the first argument of $\mathsf{a}$. Keeping this in mind, $\mathcal{A}:\mathbb{N}\to C$, defined by $\mathcal{A}_n:=[\mathsf{a}_{n,\cdot}]$, is a sequence of equivalence classes and $\mathcal{A}_n$ is an equivalence class itself. Since $i(M)$ is dense in $C$, for each $\mathcal{A}_n\in C$ there is a $\mathcal{B}_n\in i(M)$ such that $d_C(\mathcal{A}_n,\mathcal{B}_n)<\frac{1}{n}$ for all $n\in \mathbb{N}$. We can show that $\mathcal{B}:\mathbb{N}\to i(M)$ is Cauchy. Indeed, we have
+\begin{equation}
+d_C(\mathcal{B}_m,\mathcal{B}_n)\leq d_C(\mathcal{B}_m,\mathcal{A}_m)+d_C(\mathcal{A}_m,\mathcal{A}_n)+d_C(\mathcal{A}_n,\mathcal{B}_n)<\frac{1}{m}+d_C(\mathcal{A}_m,\mathcal{A}_n)+\frac{1}{n},
+\end{equation}
+where we made use of the triangle inequality and the point mentioned above. Now, let $\epsilon$ be given. For the sequence $n \mapsto \frac{1}{n}$ converges to 0, there is a $K_1\in\mathbb{N}$ such that for all $n\ge K_1$ we have $\frac{1}{n} < \frac{\epsilon}{3}$. Indeed, the existence of $K_1$ is guaranteed by the Archimedean property of real numbers, which states that for every real number there is an integer, which is greater than it. Consequently, for the real number $\frac{3}{\epsilon}$ there is a $K_1$ such that $K_1>\frac{3}{\epsilon}$, which implies that $\frac{1}{n}<\frac{1}{K_1}<\frac{\epsilon}{3}$.  In addition, $\mathcal{A}:\mathbb{N}\to C$ is Cauchy so there is a $K_2$ such that for all $n,m \ge K_2$ we have $d_C(\mathcal{A}_m,\mathcal{A}_n)<\frac{\epsilon}{3}$. Consequently, if we choose $K=\max\{K_1,K_2\}$ then for all $n,m\ge K$ we have $d_C(\mathcal{B}_m,\mathcal{B}_n) < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon$ which implies that $\mathcal{B}:\mathbb{N}\to i(M)$ is Cauchy. Now, look at the sequence $b:\mathbb{N}\to M$ obtained by $b_n:=i^{-1}(\mathcal{B}_n)$ which makes sense since $\mathcal{B}_n\in i(M)$. Since $i^{-1}:i(M)\to M$ is an isometry and $\mathcal{B}:\mathbb{N}\to i(M)$ is Cauchy then $b:\mathbb{N}\to M$ is also Cauchy. Then, there is an equivalence class $[b]\in C$. We claim that $\mathcal{B}:\mathbb{N}\to i(M)$ converges to $[b]$. By construction, $i(b_m)=\mathcal{B}_m$, so the equivalence class $\mathcal{B}_m$ should contain a representative constant sequence whose constant term is $b_m$. Let us represent $\mathcal{B}_m$ with this sequence so $\mathcal{B}_m=[\mathsf{b}_{m,\cdot}]$ where $\mathsf{b}_{m,n}=b_m$ for all $n\in\mathbb{N}$. Keeping this in mind, we have
+\begin{equation}
+d_C(\mathcal{B}_m,[b]) = d_C([\mathsf{b}_{m,\cdot}],[b]) = \lim_{n\to\infty}d_M(\mathsf{b}_{m,n},b_n) = \lim_{n\to\infty}d_M(b_m,b_n),
+\end{equation}
+but this can be made sufficiently small since $b:\mathbb{N}\to M$ is Cauchy. More specifically, given $\epsilon$, there is a $K\in\mathbb{N}$ such that for all $n,m\ge K$ we have have $d_M(b_m,b_n)<\frac{\epsilon}{2}$. Again, by using \cref{ineq:lim}, take limits we respect to $n$ to obtain $\lim_{n\to\infty}d_M(b_m,b_n)\leq\frac{\epsilon}{2}<\epsilon$. Since $\mathcal{B}:\mathbb{N}\to i(M)$ is co-Cauchy with $\mathcal{A}:\mathbb{N}\to C$ and $\mathcal{B}:\mathbb{N}\to i(M)$ converges, $\mathcal{A}:\mathbb{N}\to C$ also converges which implies that every Cauchy sequence in $C$ converges and $C$ is complete.
+
+We have constructed a complete metric space $C$ from our original metric space $M$. Evidently, if $M$ was already complete then we would expect that this process adds nothing to $M$. Let us verify this. More precisely, we claim that $i(M)=C$ if and only if $M$ is complete. Suppose that $i(M)=C$, hence $i(M)$ is complete. But $i:M\to i(M)$ is an isometry so $M$ is complete. Conversely, let $M$ be complete. First, we show that $i(M)$ is closed, which is equivalent to saying that it contains all of its limit points. Let $[a]\in C$ be a limit point of $i(M)$. Consequently, there is a sequence $\mathcal{A}:\mathbb{N}\to i(M)$ that converges to $[a]$. As a convergent sequence, $\mathcal{A}:\mathbb{N}\to i(M)$ is Cauchy and its inverse image $i^{-1}\circ \mathcal{A}:\mathbb{N}\to M$ is also Cauchy as $i^{-1}:i(M)\to M$ is an isometry. Since $M$ is complete, $i^{-1}\circ \mathcal{A}:\mathbb{N}\to M$ converges to some point $x\in M$. As every isometry sends convergent sequences to convergent ones, the sequence $i\circ i^{-1}\circ\mathcal{A}=\mathds{1}\circ\mathcal{A}=\mathcal{A}:\mathbb{N}\to i(M)$ should converge to some $[b]\in i(M)$. But, the limit of a sequence is unique so $[a]=[b]$ and $[a]\in i(M)$, telling us that $i(M)$ is closed. This immediately gives us $i(M)=C$ as we already know that $i(M) =\clr i(M)$ and $\clr i(M) = C$.
+
+Now, we want to show that any other completion is isometric to the one we constructed. This clearly implies that any two other completions are isometric. First note that $\mathfrak{i}:=j\circ i^{-1}:i(M)\to j(M)$ is an isometry since composition of isometries is an isometry. More precisely, since $i^{-1}:i(M)\to M$ and $j:M\to j(M)$ are isometries, for every $[a],[b]\in i(M)$ we have that
+\begin{equation}
+\begin{aligned}[b]
+d_C([a],[b]) &= d_M\big(i^{-1}([a]),i^{-1}([b])\big) \\
+&= d_E\big(j(i^{-1}([a])),j(i^{-1}([b]))\big) \\
+&= d_E\big((j\circ i^{-1})([a]),(j\circ i^{-1})([b])\big) \\
+&= d_E\big(\mathfrak{i}([a]),\mathfrak{i}([b])\big).
+\end{aligned}
+\end{equation}
+Moreover, $\mathfrak{i}:i(M)\to j(M)$ is a surjection as the composition of surjections is a surjection. These two results imply that $\mathfrak{i}:i(M)\to j(M)$ is an isometry. Take an equivalence class $[a]\in C$. Since $i(M)$ is dense in $C$, then $[a]$ is a limit point of $i(M)$ and there is a sequence of equivalence classes $\mathcal{A}:\mathbb{N}\to i(M)$ that converges to $[a]$. As a convergent sequence, $\mathcal{A}:\mathbb{N}\to i(M)$ is Cauchy so its isometric image $\mathfrak{i}\circ \mathcal{A}:\mathbb{N}\to j(M)$ is also Cauchy. Noting that $j(M)\subset E$ and $E$ is complete, $\lim_{n\to\infty}(\mathfrak{i}\circ\mathcal{A})_n\in E$ exists. Define the mapping $f:C\to E$ by this procedure such that $f([a])=\lim_{n\to\infty}(\mathfrak{i}\circ\mathcal{A})_n$. To show that this mapping is well defined we must show that the limit does not depend on the choice of sequences of equivalence classes converging to $[a]$. For this purpose, suppose $\lim_{n\to\infty}\mathcal{A}_n=[a]$ and $\lim_{n\to\infty}\mathcal{B}_n=[a]$. This implies that $\lim_{n\to\infty}\mathcal{A}_n=\lim_{n\to\infty}\mathcal{B}_n$ which in turn gives $\mathfrak{i}(\lim_{n\to\infty}\mathcal{A}_n)=\mathfrak{i}(\lim_{n\to\infty}\mathcal{B}_n)$. Noting that every isometry is continuous, we can simply take the limits out to obtain $\lim_{n\to\infty}\mathfrak{i}(\mathcal{A}_n)=\lim_{n\to\infty}\mathfrak{i}(\mathcal{B}_n)$, concluding that $f$ is well-defined. Next, we show that $f:C\to E$ is surjective. Now, take any element $u\in E$. As $j(M)$ is dense in $E$, there is a sequence $\mathcal{U}:\mathbb{N}\to j(M)$ converging to $u$. The sequence $\mathcal{U}:\mathbb{N}\to j(M)$ is Cauchy and its isometric image $\mathcal{A}:=\mathfrak{i}^{-1}\circ\mathcal{U}:\mathbb{N}\to i(M)$ is also Cauchy. Since $C$ is complete $\mathcal{A}:\mathbb{N}\to i(M)$ converges to some $[a]\in C$. Now, we clearly see that
+\begin{equation}
+f([a])=\lim_{n\to\infty}(\mathfrak{i}\circ\mathcal{A})_n
+=\lim_{n\to\infty}(\mathfrak{i}\circ\mathfrak{i}^{-1}\circ\mathcal{U})_n
+=\lim_{n\to\infty}(\mathds{1}\circ\mathcal{U})_n
+=\lim_{n\to\infty}\mathcal{U}_n=u.
+\end{equation}
+The only thing left to show is that $f:C\to E$ preserves metrics. That's easy! Take a careful look at each step of the following
+\begin{equation}
+\begin{aligned}[b]
+d_E\big(f([a]),f([b])\big) &= d_E\big((\lim_{n\to\infty}(\mathfrak{i}\circ\mathcal{A})_n,\lim_{n\to\infty}(\mathfrak{i}\circ \mathcal{B})_n)\big) \\
+&= d_E\big((\lim_{n\to\infty}\mathfrak{i}(\mathcal{A}_n),\lim_{n\to\infty}\mathfrak{i}(\mathcal{B}_n))\big) \\
+&= d_E\big(\lim_{n\to\infty}(\mathfrak{i}(\mathcal{A}_n),\mathfrak{i}(\mathcal{B}_n))\big) \\
+&= \lim_{n\to\infty}d_E\big(\mathfrak{i}(\mathcal{A}_n),\mathfrak{i}(\mathcal{B}_n)\big) \\
+&= \lim_{n\to\infty}d_C(\mathcal{A}_n,\mathcal{B}_n) \\
+&= d_C\big(\lim_{n\to\infty}(\mathcal{A}_n,\mathcal{B}_n)\big) \\
+&= d_C\big(\lim_{n\to\infty}\mathcal{A}_n,\lim_{n\to\infty}\mathcal{B}_n\big). \\
+&= d_C([a],[b]).
+\end{aligned}
+\end{equation}
+We noted the fact every sequence in a Cartesian product metric space converges if and only if all of its components converge. We also used that $d_E$ and $d_C$ are continuous and that $\mathfrak{i}:i(M)\to j(M)$ is an isometry.
+
+It remains to show that the isometry $f:C\to E$ is unique in the sense described in step 3. Let $[a]\in i(M)$, so we can take a constant sequence $\mathcal{A}:\mathbb{N}\to i(M)$ such that $\mathcal{A}_n=[a]$. According to the definition of $f$ we have
+\begin{equation}
+f([a]):=\lim_{n\to\infty}(\mathfrak{i}\circ\mathcal{A})_n=\lim_{n\to\infty}\mathfrak{i}(\mathcal{A}_n)=\lim_{n\to\infty}\mathfrak{i}([a])=\mathfrak{i}([a]),
+\end{equation}
+which implies that $f|_{i(M)}=\mathfrak{i}$. Let $g:C\to E$ be any other isometry with this propery, so $g|_{i(M)}=\mathfrak{i}$. It is easily observed that $f=g$. Choose any $[a]\in C\backslash i(M)$ and let $\mathcal{A}:\mathbb{N}\to i(M)$ be a sequence converging to $[a]$. This is possible since $i(M)$ is dense in $C$, implying that $[a]$ is a limit point of $i(M)$. Then we have
+\begin{equation}
+f([a])=f(\lim_{n\to\infty}\mathcal{A}_n)=\lim_{n\to\infty}f(\mathcal{A}_n)=\lim_{n\to\infty}g(\mathcal{A}_n)=g(\lim_{n\to\infty}\mathcal{A}_n)=g([a]),
+\end{equation}
+where we made use of $f|_{i(M)}=g|_{i(M)}$ and the continuity of $f:C\to E$ and $g:C\to E$.
+\end{prf}
+
+\end{document}
+
