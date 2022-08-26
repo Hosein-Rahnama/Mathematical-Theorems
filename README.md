@@ -11,3 +11,4 @@ Add the following theorems.
 - [ ] Bionomal expansion
 - [ ] Inclusion and exclusion principle
 - [ ] Sterling formula
+- [ ] Bounds, extrema and limit points

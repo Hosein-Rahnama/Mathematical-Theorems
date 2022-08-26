@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+
+\usepackage[a4paper,total={17cm,25cm}]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage[mathcal]{euscript}
+\usepackage[colorlinks=true,citecolor=blue]{hyperref}
+\usepackage{cleveref}
+\usepackage{graphicx}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{axm}{Axiom}
+\newtheorem{conj}{Conjecture}
+\newtheorem{exmp}{Example}
+
+\crefname{lem}{Lemma}{Lemmas}
+\crefname{thm}{Theorem}{Theorems}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+
+\newenvironment{prf}{\noindent\textbf{Proof.}}{\hfill$\blacksquare$}
+
+\begin{document}
+
+\begin{center}
+{\Large \scshape Well-Ordering and Induction} \\
+Written by Hosein Rahnama
+\end{center}
+
+\begin{axm}
+Every nonempty subset $S$ of the natural numbers $\mathbb{N}$ has a minimum. This is called the well-ordering principle.
+\end{axm}
+
+\begin{axm}
+Let $S$ be a subset of $\mathbb{N}$ such that $1 \in S$ and $n \in S$ implies that $n + 1 \in S$. Then $S$ is equal to $\mathbb{N}$. This is called the induction principle.
+\end{axm}
+
+\begin{thm}
+The well-ordering principle is equivalent to the induction principle.
+\end{thm}
+
+\begin{prf}
+Both proofs are by contradiction. First, let us show that the well-ordering principle implies the induction principle. Let $S$ be a subset of $\mathbb{N}$ such that $1 \in S$ and $n \in S$ implies that $n + 1 \in S$. We want to prove that $S = \mathbb{N}$. Suppose that it is not true then the complement of $S$ defined as $T = \mathbb{N} - S$ is nonempty, and by the well-ordering principle has a minimum $t_{\min} \in T$. Since $1 \notin T$ then $1 < t_{\min}$ and $t_{\min} - 1 \in \mathbb{N}$. Furthermore, $t_{\min} -1 < t_{\min}$ which implies that $t_{\min} - 1 \notin T$ since for every $t \in T$ we have $t_{\min} \leq t$.  Consequenlty, $t_{\min} - 1$ should belong to the complement of $T$ which is $\mathbb{N} - T = \mathbb{N} - (\mathbb{N} - S) = S$ so $t_{\min} - 1 \in S$. The inductive property of $S$ tell us that $(t_{\min} - 1) + 1 = t_{\min} \in S$, which is in contradiction with $t_{\min} \in T$ and we should have $S=\mathbb{N}$.
+
+Now, let us prove that the induction principle implies the well-ordering principle. Let $S$ be a nonempty subset of $\mathbb{N}$. We want to show that it has a minimum. Suppose that this is not true then $1 \notin S$ otherwise $S$ would have a minimum since for every $s \in S$ we have $1 \leq s$. This means that $S \subset \mathbb{N} - \{ 1 \}$. Now, $2 \notin S$ otherwise $2$ would be a minimum for $S$ since for every $s \in S$, we know that $s \in \mathbb{N} - \{ 1 \}$ which implies $2 \leq s$. This leads to $S \subset \mathbb{N} - \{1, 2\}$. Let us define $T = \{ t | \, S \subset \mathbb{N} - \{ 1, 2, \dots, t\}  \}$. We observe that $1 \in T$. Furthermore, if $t \in T$ then $t + 1 \in T$. Indeed, $t \in T$ tells us that $S \subset \mathbb{N} - \{ 1, 2, \dots, t\}$. We claim that $t + 1 \notin S$ otherwise for every $s \in S$ we know that $s \in \mathbb{N} - \{1, 2, \dots, t\}$, implying that $t + 1 \leq s$, which is in contraction with our assumption that $S$ does not have any minimum. By the induction principle we conclude that $T = \mathbb{N}$. Since $S$ is nonempty, there is an $s \in S$. Moreover, $T = \mathbb{N}$ and we have $s \in T$, which leads us to $S \subset \mathbb{N} - \{1, 2, \dots, s \}$ which implies that $s \notin S$. This is a contradiction so $S$ must have a minimum.
+\end{prf}
+
+\end{document}
